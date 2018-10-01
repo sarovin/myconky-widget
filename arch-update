@@ -1,0 +1,9 @@
+#!/bin/bash
+
+YAY=$(yay -Qu | wc -l)
+if [ $YAY -gt 0 ]; then
+  echo "$YAY out of date"
+else
+  echo "updated"
+fi
+

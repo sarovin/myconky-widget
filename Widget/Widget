@@ -1,0 +1,78 @@
+background yes
+use_xft yes
+xftfont 123:size=8
+xftalpha 0.1
+update_interval 0.5
+total_run_times 0
+own_window yes
+own_window_type override
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+minimum_size 250 5
+maximum_width 400
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+default_color gray
+default_shade_color red
+default_outline_color green
+alignment middle_right
+gap_x 10
+gap_y 10
+no_buffers no
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 1
+override_utf8_locale yes
+use_spacer yes
+text_buffer_size 256
+
+TEXT
+
+${color DimGray}
+${font}
+${font Arial:bold:size=10}${color Ivory}ETH ${color DarkSlateGray}${hr 2}
+$font${color DimGray}Price $alignr${execi 300 ~/Scripts/gdax ETH-EUR price}€
+$font${color DimGray}Volume $alignr${execi 300 ~/Scripts/gdax ETH-EUR volume}
+
+${font Arial:bold:size=10}${color Ivory}SYSTEM ${color DarkSlateGray}${hr 2}
+$font${color DimGray}$sysname $kernel $alignr $machine
+Intel Core i5-2415M $alignr${freq_g cpu0}Ghz
+Uptime $alignr${uptime}
+Arch Update $alignr${execi 300 ~/Scripts/arch-update}
+
+${font Arial:bold:size=10}${color Ivory}PROCESSORS ${color DarkSlateGray}${hr 2}
+$font${color DimGray}CPU1  ${cpu cpu1}% ${cpubar cpu1}
+CPU2  ${cpu cpu2}% ${cpubar cpu2}
+CPU3  ${cpu cpu3}% ${cpubar cpu3}
+CPU4  ${cpu cpu4}% ${cpubar cpu4}
+
+${font Arial:bold:size=10}${color Ivory}MEMORY ${color DarkSlateGray}${hr 2}
+$font${color DimGray}MEM $alignc $mem / $memmax $alignr $memperc%
+$membar
+
+${font Arial:bold:size=10}${color Ivory}HDD ${color DarkSlateGray}${hr 2}
+$font${color DimGray}/boot $alignc ${fs_used /boot} / ${fs_size /boot} $alignr${fs_free_perc /boot}%
+${fs_bar /boot}
+/home $alignc ${fs_used /home} / ${fs_size /home} $alignr ${fs_free_perc /home}%
+${fs_bar /home}
+
+${font Arial:bold:size=10}${color Ivory}TOP PROCESSES ${color DarkSlateGray}${hr 2}
+${color DimGray}$font${top name 1}${alignr}${top cpu 1} %
+$font${top name 2}${alignr}${top cpu 2} %
+$font${top name 3}${alignr}${top cpu 3} %
+
+${font Arial:bold:size=10}${color Ivory}NETWORK ${color DarkSlateGray}${hr 2}
+$font${color DimGray}IP on Wifi $alignr ${addr eth0}
+$font${color DimGray}Public IP $alignr${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
+
+$alignc${downspeed eth0} kb/s Down / Up ${upspeed eth0} kb/s
+${upspeedgraph eth0 40,} 
+
+Downloaded: $alignr  ${totaldown eth0}
+Uploaded: $alignr  ${totalup eth0}
+
+${font Arial:bold:size=10}${color Ivory}DEVICE${color DarkSlateGray}${hr 2}
+$font${color DimGray}LOCAL $alignr ${execi 300  ~/Scripts/isreachable 127.0.0.1 3000}

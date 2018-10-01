@@ -1,0 +1,8 @@
+#!/bin/bash
+
+NMAP=$(nmap -p $2 $1)
+if [[ $NMAP == *"Host is up"* && $NMAP == *"open"* ]]; then
+  echo "$2 UP"
+else
+  echo "$2 DOWN"
+fi

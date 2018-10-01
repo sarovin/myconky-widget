@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl --silent  https://api.pro.coinbase.com/products/$1/ticker | jq -r ".$2 | tonumber"
